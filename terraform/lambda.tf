@@ -8,7 +8,7 @@ resource "random_string" "lambda_src_hash" {
 
 data "archive_file" "source" {
   type        = "zip"
-  output_path = "${path.root}/lambda/${var.prefix_name}-${random_string.lambda_src_hash.result}.zip"
+  output_path = "${path.root}/lambda_packages/${var.prefix_name}-${random_string.lambda_src_hash.result}.zip"
   source {
     content  = var.lambda
     filename = var.file_name
@@ -16,7 +16,7 @@ data "archive_file" "source" {
 }
 
 resource "aws_lambda_function" "lambda" {
-  filename      = "${path.root}/lambda/${var.prefix_name}-${random_string.lambda_src_hash.result}.zip"
+  filename      = "${path.root}/lambda_packages/${var.prefix_name}-${random_string.lambda_src_hash.result}.zip"
   function_name = "${var.prefix_name}-lambda"
   role          = aws_iam_role.content_type_check_lambda_role.arn
   handler       = var.handler

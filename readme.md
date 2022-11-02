@@ -56,7 +56,7 @@ module "terraform-aws-s3-uploader" {
   file_name           = lambda filename
   lambda              = templatefile(path_to_lambda_function_templatefile, {arguments})
   aws_acm_certificate = acm certificate arn
-  r53_zone            = domain name of hosted zone for R53 record
+  r53_zone            = Zone ID of R53 zone to host R53 records
 }
 ```
 
